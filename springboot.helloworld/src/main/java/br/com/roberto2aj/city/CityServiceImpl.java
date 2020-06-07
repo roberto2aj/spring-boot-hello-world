@@ -4,7 +4,9 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
+import org.springframework.web.server.ResponseStatusException;
 
 @Component
 class CityServiceImpl implements CityService {
@@ -18,13 +20,14 @@ class CityServiceImpl implements CityService {
 	}
 
 	@Override
-	public Optional<City> findById(Integer cityId) {
-		return repository.findById(cityId);
+	public City findById(Integer cityId) {
+		Optional<City> city = repository.findById(cityId);
+		return city.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "City not found"));
 	}
 
 	@Override
-	public void delete(Integer id) {
-		repository.deleteById(id);
+	public void delete(Integer cityId) {
+		repository.delete(findById(cityId));
 	}
 
 	@Override
@@ -35,6 +38,7 @@ class CityServiceImpl implements CityService {
 
 	@Override
 	public City update(City city) {
+		findById(city.getId());
 		return repository.save(city);
 	}
 

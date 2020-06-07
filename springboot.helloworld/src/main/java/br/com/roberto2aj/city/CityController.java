@@ -26,7 +26,7 @@ public class CityController {
 
 	@GetMapping("{cityId}")
 	public City findById(@PathVariable Integer cityId) {
-		return service.findById(cityId).get();
+		return service.findById(cityId);
 	}
 
 	@PostMapping
