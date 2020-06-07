@@ -21,4 +21,21 @@ class CityServiceImpl implements CityService {
 	public Optional<City> findById(Integer cityId) {
 		return repository.findById(cityId);
 	}
+
+	@Override
+	public void delete(Integer id) {
+		repository.deleteById(id);
+	}
+
+	@Override
+	public City insert(String cityName) {
+		City city = new City(cityName);
+		return repository.save(city);
+	}
+
+	@Override
+	public City update(City city) {
+		return repository.save(city);
+	}
+
 }

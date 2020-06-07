@@ -12,4 +12,10 @@ public interface CityService {
 
 	Optional<City> findById(Integer cityId);
 
+	void delete(Integer id);
+
+	City insert(String cityName);
+
+	City update(City city);
+
 }
