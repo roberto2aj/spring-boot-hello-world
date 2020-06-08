@@ -4,9 +4,9 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
-import org.springframework.web.server.ResponseStatusException;
+
+import br.com.roberto2aj.EntityNotFoundException;
 
 @Component
 class CityServiceImpl implements CityService {
@@ -22,7 +22,7 @@ class CityServiceImpl implements CityService {
 	@Override
 	public City findById(Integer cityId) {
 		Optional<City> city = repository.findById(cityId);
-		return city.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "City not found"));
+		return city.orElseThrow(() -> new EntityNotFoundException("City not found."));
 	}
 
 	@Override
